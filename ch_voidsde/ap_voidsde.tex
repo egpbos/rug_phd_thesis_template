@@ -1,0 +1,88 @@
+%!TEX root = ../thesis.tex
+\section{Models of Dark Energy}
+
+% \addcontentsline{toc}{chapter}{Models of Dark Energy}
+% \chapterauthors{E.G.P. Bos, Rien van de Weijgaert, Klaus Dolag\footnote{Department of Physics, Ludwig-Maximilians-Universit\"at, Scheinerstr. 1, 81679 M\"unchen, Germany and Max Planck Institut f\"ur Astrophysik, P.O. Box 1317, D-85741 Garching, Germany}, Valeria Pettorino\footnote{Universit\'e de Gen\`eve, D\'epartement de physique th\'eorique, 24 Quai Ansermet, 1211, Gen\`eve, Switzerland}}
+
+\label{ap:modelsofDE}
+
+In this section, we elaborate on the specific models of dark energy that we have considered in this work (the same models were used in \citet{deboni11}). Dark energy has its influence on cosmology through the Friedmann equation (equation~\ref{eqn:friedmann}). Hence, we derive $w_\mathrm{DE}(a)$ for each model, which is the only remaining missing piece from equation~\ref{eqn:friedmann}.
+
+Our reference model is a universe containing cold DM and a cosmological constant: $\Lambda$CDM. We compare this model to four different models of time dependent dark energy. We use two quintessence models, in which the dark energy is described as a scalar field under the influence of a potential. The other two models are extended quintessence models, where the scalar field is coupled to gravity.
+
+In the following we set $a_0 = 1$. We assume a universe with flat geometry, i.e.\ without curvature. The equations used to determine $w(a)$ are given. The resulting relations for the different models are shown in figure~\ref{fig:wvsz}.
+
+\paragraph*{Cosmological constant}
+
+Dark energy in a $\Lambda$CDM cosmology is modelled by a cosmological constant, or equivalently a constant $w_\Lambda = -1$ in equation~\ref{eqn:friedmann}.
+
+\paragraph*{Quintessence}
+
+Dark energy modelled by a scalar field $\phi$ in a potential $V(\phi)$ is called ``quintessence'' dark energy \citep{wetterich88, rp88}. This model has $w = w(a)$ and the Friedmann equation is
+\begin{equation}
+\begin{split}
+	\left(\frac{H}{H_0} \right)^2 = \frac{\Omega_{0,m}}{a^3} + \frac{\Omega_{0,r}}{a^4} \\
+	+ \Omega_{0,\phi}\exp\left( -3 \int_{a_0}^a \frac{1+w_\phi(a')}{a'}da' \right) \,,
+\end{split}
+\end{equation}
+where
+\begin{equation}
+     \label{eqn:w_quintessence}
+     w_\phi = \frac{P_\phi}{\rho_\phi} = \frac{\frac{1}{2}\dot{\phi}^2 - V(\phi)}{\frac{1}{2}\dot{\phi}^2 + V(\phi)} \,.
+\end{equation}
+Note that when the kinetic term $\dot{\phi}$ vanishes, we regain the $\Lambda$CDM value of $w=-1$. The cosmological constant can, thus, be seen as a special case of the more general quintessence model of dark energy. We can solve for $\phi$ using the Klein-Gordon equation:
+\begin{equation}
+	\ddot{\phi} + 3H\dot{\phi} + \frac{\partial V(\phi)}{\partial \phi} = 0 \,.
+\end{equation}
+
+The potential $V(\phi)$ determines the model's dynamical properties. We have used an inverse power law potential \citep{rp88} and a generalised inverse power law potential \citep{brax00}. The latter potential expands upon the former by including corrections from supergravity \citep{freedman76}. These models, which we will later refer to as RP and SUGRA respectively, have the following potentials:
+\begin{equation}
+	V_\mathrm{RP}(\phi) = \frac{\Lambda^{4+\alpha}}{\phi^\alpha}
+\end{equation}
+\begin{equation}
+	V_\mathrm{SUGRA}(\phi) = \frac{\Lambda^{4+\alpha}}{\phi^\alpha}\exp\left( 4\pi G \phi^2 \right) \,,
+\end{equation}
+where $\alpha \geqslant 0$ and $\Lambda$ are free parameters. They are both tracker potentials.
+
+\paragraph*{Extended Quintessence}
+Secondly, we consider a scalar field explicitly coupled to the rest of the universal components through gravity \citep{boisseau00}. Specifically, we consider here the so-called ``extended quintessence'' (EQ) models \citep{pettorino08}. The way we represent an interaction in field theory is by adding an interaction term to the action of the field. This term is a (Lorentz invariant) product of the quantities that represent the fields that we want to interact. In our case, these are the gravitational field represented by the Ricci scalar $R$ and the EQ field $\phi$. The action then becomes \citep{baccigalupi00}
+\begin{equation}
+\begin{split}
+S = &\int d^4x \sqrt{-g} \\
+    &\left[ \frac{1}{2} F(\phi)R - \frac{1}{2}\partial^\mu\phi\partial_\mu\phi - V(\phi) + L' \right] \,,
+\end{split}
+\end{equation}
+where $L'$ contains the terms of the Lagrangian without $\phi$. $F(\phi)$ is given by
+\begin{equation}
+ F(\phi) = \frac{1}{8\pi G} + \xi \left(\phi^2 - \phi_0^2\right) \,,
+\end{equation}
+where $\xi$ determines the strength of the interaction and $\phi_0 = \phi(t_0)$.
+
+In what follows, we only consider the linear (Newtonian) limit. We can then approximate the effect of EQ in an $N$-body simulation by replacing the gravitational constant $G$ by a time dependent parameter $\tilde{G}$, given by:
+\begin{equation}
+	\frac{\tilde{G}}G \sim 1 - 8\pi G \xi (\phi^2 - \phi_0^2) \,.
+\end{equation}
+This is supported by version 3 of the GADGET code and, thus, we conveniently solve this otherwise complicated problem. Additionally, in the linear regime, the equation of state parameter $w(z)$ behaves like the normal quintessence ones. We use the RP potential for these models.
+
+The linear approximation is valid if $w_{JBD} \gg 1$, where
+\begin{equation}
+\label{eqn:wJBD}
+ w_{JBD} \equiv \frac{F(\phi)}{\left[\partial F(\phi)/\partial \phi\right]^2} = \frac{\frac{1}{8\pi G} + \xi \left(\phi^2 - \phi_0^2\right)}{4\xi^2\phi^2} \,.
+\end{equation}
+Using this relation we can determine the allowed values of $\xi$. The lower limit for $w_{JBD,0}$ (and, thus, the upper limit for the interaction term $\xi$, because $w_{JBD,0} \propto \xi^{-2}$) can be determined by observations. On cosmological scales, this limit -- as obtained using WMAP1 and 2dF data -- is set at $\left|w_{JBD,0}\right| > 120$ \citep{acquaviva05}. Because we want the interaction to be as strong as possible within observational limits we indeed set $\xi$ using this value; $w_{JBD,0} = 120$.
+
+The two models we consider are those with a positive and a negative value of $\xi$ (referred to as EQp and EQn hence forward). These two models differ slightly in the gravitational parameter. At $z<0$, $\frac{\tilde{G}}G > 1$ for EQp and $\frac{\tilde{G}}G < 1$ for EQn. These corrections are within the few percent level.
+
+\paragraph*{General parametrization}
+
+We can fit equation~\ref{eqn:DEgeneralparam} to these models using a simple $\chi^2$ fitting procedure with $w_a$ as a free parameter ($w_0$ is fixed to the values that were chosen for the simulations). We find the best fits as given in table~\ref{tab:wafits} (and again in table~\ref{tab:DEparams}).
+
+\begin{table}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrr}
+\itshape Model & $\Lambda$CDM & RP & SUGRA & EQp & EQn \\ \hline
+$w_a$ & $0.0$ & $0.0564$ & $0.452$ & $0.0117$ & $0.0805$ \\
+$w_0$ & $-1.0$  & $-0.9$ & $-0.9$ & $-0.9$ & $-0.9$ \\
+\end{tabular*}
+\caption{Fits of dark energy model parameters $w_a$ to the $w(a)$ relations in figure~\ref{fig:wvsz}, determined using a $\chi^2$ fit.}
+\label{tab:wafits}
+\end{table}

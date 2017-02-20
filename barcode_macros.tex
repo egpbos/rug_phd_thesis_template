@@ -1,0 +1,112 @@
+%!TEX root = thesis.tex
+\newcommand{\dif}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pdif}[2]{\frac{\partial #1}{\partial #2} }
+\newcommand{\prior}{\mathscr{P}}
+\newcommand{\likeli}{\mathscr{L}}
+\newcommand{\lnL}{\ln\likeli}
+\newcommand{\lnP}{\ln\prior}
+\newcommand{\hamHMC}{\mathscr{H}}
+\newcommand{\potHMC}{\mathscr{E}}
+\newcommand{\kinHMC}{\mathscr{K}}
+\newcommand{\masHMC}{\mathscr{M}}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+% \newcommand{\momHMC}{\textswab{p}}
+% \newcommand{\posHMC}{\textswab{q}}
+\newcommand{\momHMC}{\mathpzc{p}}
+\newcommand{\posHMC}{\mathpzc{q}}
+
+% Kronecker delta
+\newcommand{\krodel}{\delta^{\rm K}}
+
+% \newcommand{\bs}[1]{{\boldsymbol{#1}}}
+\newcommand{\bs}[1]{{\bm{#1}}}
+\newcommand{\bnabla}{\bs{\nabla}}
+\newcommand{\ft}{\mathcal{F}}
+\newcommand{\dft}{\ft_D}
+\newcommand{\obs}{\mathrm{obs}}
+\newcommand{\obsd}{\mathrm{obs'ed}}
+% displacement field
+\newcommand{\displace}{\bs{s}}
+\newcommand{\displacescalar}{s}
+\newcommand{\divdisp}{\vartheta}
+% redshift space
+\newcommand{\zspace}{\bs{\zeta}}
+\newcommand{\displacez}{{\bs{s}_\zeta}}
+% \newcommand{\bz}{\bs{z}}
+% general coordinates
+\newcommand{\bv}{\bs{v}}   % (peculiar) velocity
+% \newcommand{\hatr}{\hat{\bs{r}}}
+\newcommand{\bx}{\bs{x}}   % comoving / Eulerian coordinates
+\newcommand{\bq}{\bs{q}}   % Lagrangian coordinates
+\newcommand{\bk}{\bs{k}}   % Fourier scale vector (usually complement of \bq)
+\newcommand{\br}{\bs{r}}   % physical coordinates
+\newcommand{\hatx}{\hat{\bs{x}}} % comoving / Eulerian unit vector
+
+\newcommand{\mpc}{\mathrm{Mpc}}
+\newcommand{\mpch}{~h^{-1} \mpc}
+\newcommand{\mpchcube}{~h^{-3} \mpc^3}
+
+\newcommand{\one}{{(1)}}
+\newcommand{\two}{{(2)}}
+\newcommand{\delone}{\delta^{(1)}}
+\newcommand{\deltwo}{\delta^{(2)}}
+\newcommand{\deloneq}{\delta^{(1)}(\bq)}
+\newcommand{\deltwoq}{\delta^{(2)}(\bq)}
+\newcommand{\Delone}{\Delta^{(1)}}
+\newcommand{\Deltwo}{\Delta^{(2)}}
+\newcommand{\Deloneq}{\Delta^{(1)}(\bq)}
+\newcommand{\Deltwoq}{\Delta^{(2)}(\bq)}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
+
+% Paar standaard kleurtjes, voor kleurenblinden (http://jfly.iam.u-tokyo.ac.jp/color/)
+\definecolor{orange}{rgb}{0.9,0.6,0}
+\definecolor{skyblue}{rgb}{0.35,0.7,0.9}
+\definecolor{bluishgreen}{rgb}{0,0.6,0.5}
+\definecolor{yellow}{rgb}{0.95,0.9,0.25}
+\definecolor{blue}{rgb}{0,0.45,0.7}
+\definecolor{vermillion}{rgb}{0.8,0.4,0}
+\definecolor{reddishpurple}{rgb}{0.8,0.6,0.7}
+
+% Zet deze commands aan voor gekleurde tekst:
+\newcommand{\ca}[1]{\textcolor{orange}{#1}}
+\newcommand{\cb}[1]{\textcolor{skyblue}{#1}}
+\newcommand{\cc}[1]{\textcolor{bluishgreen}{#1}}
+\newcommand{\cd}[1]{\textcolor{yellow}{#1}}
+\newcommand{\ce}[1]{\textcolor{blue}{#1}}
+\newcommand{\cf}[1]{\textcolor{vermillion}{#1}}
+\newcommand{\cg}[1]{\textcolor{reddishpurple}{#1}}
+
+% Vervang bovenstaande commando's met deze om de gekleurde tekst weg te laten:
+%\newcommand{\ca}[1]{{#1}}
+%\newcommand{\cb}[1]{{#1}}
+%\newcommand{\cc}[1]{{#1}}
+%\newcommand{\cd}[1]{{#1}}
+%\newcommand{\ce}[1]{{#1}}
+%\newcommand{\cf}[1]{{#1}}
+%\newcommand{\cg}[1]{{#1}}
+
+% Paar gekleurde q's
+\newcommand{\qa}{\ca{\bq}}
+\newcommand{\qb}{\ce{\bq'}}
+\newcommand{\qc}{\cg{\bq''}}
+\newcommand{\qjb}{\cf{\bq_j'}}
+\newcommand{\qi}{\cb{\bq_i}}
+
+% underlined indices to distinguish vector-component-indices from grid-cell-indices
+\newcommand{\ua}{\underline{a}}
+\newcommand{\ub}{\underline{b}}
+\newcommand{\uc}{\underline{c}}
+\newcommand{\ud}{\underline{d}}
+
+% barcode
+\newcommand{\barcode}{\textsc{barcode}}
+
+% 2DCF
+\newcommand{\twodcf}{\xi(r_\perp, r_\parallel)}
+
+% solar mass
+\newcommand{\Msol}{\ensuremath{M_{\odot}}}
+\newcommand{\Msun}{\Msol} 

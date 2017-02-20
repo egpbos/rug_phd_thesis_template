@@ -1,0 +1,151 @@
+\documentclass[openright,usenames,dvipsnames,11pt]{book}
+\input{model.tex}
+\selectlanguage{english}
+
+\input{barcode_macros}
+
+% \includeonly{ch_intro/ch_intro}
+% \includeonly{ch_barcode/ch_barcode}
+% \includeonly{ch_barcode_2lpt/ch_barcode_2lpt}
+% \includeonly{ch_filaments/ch_filaments}
+% \includeonly{ch_barcode_rsd/ch_barcode_rsd}
+% \includeonly{ch_filaments_rss/ch_filaments_rss}
+% \includeonly{ch_frontandback/titlepage}
+% \includeonly{ch_frontandback/dutch_summary}
+% \includeonly{ch_frontandback/acknowledgments}
+% \includeonly{ch_frontandback/front}
+% \includeonly{ch_frontandback/titlepage,ch_frontandback/colophon,ch_frontandback/front,ch_intro/ch_intro,ch_voidsde/ch_voidsde}
+% \includeonly{ch_voidsde/ch_voidsde}
+
+% https://designschool.canva.com/blog/100-color-combinations/, nr 8 (15 okt 2016)
+\definecolor{sky}{HTML}{375E97} 
+\definecolor{sunset}{HTML}{FB6542} 
+\definecolor{sunflower}{HTML}{FFBB00} 
+\definecolor{grass}{HTML}{3F681C} 
+
+\colorlet{ch_frontandback}{gray!70!}
+\colorlet{ch_frontandback_fg}{white}
+\colorlet{ch_intro}{sunflower}
+\colorlet{ch_intro_fg}{white}
+\colorlet{ch_voidsde}{sky}
+\colorlet{ch_voidsde_fg}{white}
+\colorlet{ch_barcode}{grass}
+\colorlet{ch_barcode_fg}{white}
+\colorlet{ch_barcode_2lpt}{grass!80!}
+\colorlet{ch_barcode_2lpt_fg}{white}
+\colorlet{ch_filaments}{grass!60!}
+\colorlet{ch_filaments_fg}{black}
+\colorlet{ch_barcode_rsd}{sunset}
+\colorlet{ch_barcode_rsd_fg}{white}
+\colorlet{ch_filaments_rss}{sunset!70}
+\colorlet{ch_filaments_rss_fg}{black}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\selectlanguage{english}
+
+\include{ch_frontandback/titlepage}
+
+\pagestyle{fancyplain}
+\renewcommand{\thepage}{\roman{page}}
+\include{ch_frontandback/colophon}
+\include{ch_frontandback/front} 
+% \include{ch_frontandback/todo}
+\pagestyle{fancyplain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter
+\setcounter{page}{1} % make sure it's the right number!
+
+
+\nolinenumbers
+% \markboth{Thesis Summary}{Thesis Summary}  % right & left headers
+% \phantomsection  % EGP: niet meer nodig (http://tex.stackexchange.com/a/62766)
+% \the\textwidth
+
+% \include{ch_intro/ch_intro}
+% \newpage
+
+% \include{fig_generate/test}
+
+% Chapters:
+% =========
+
+\include{ch_voidsde/ch_voidsde}
+\newpage
+% \include{ch_barcode/ch_barcode}
+% \newpage
+% \include{ch_barcode_2lpt/ch_barcode_2lpt}
+% \newpage
+% \include{ch_filaments/ch_filaments}
+% \newpage
+% \include{ch_barcode_rsd/ch_barcode_rsd}
+% \newpage
+% \include{ch_filaments_rss/ch_filaments_rss}
+% \newpage
+
+
+
+% Finishing up
+% \markboth
+% {Outlook}
+% {Outlook}
+% \include{ch_concluding/chapter}
+% \newpage
+
+% \include{ch_frontandback/discussion}
+
+
+
+
+
+\backmatter
+
+\addthumb{bibliography}{}{ch_frontandback_fg}{ch_frontandback}
+\begin{spacing}{0.85}
+% \include{ch_frontandback/back}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Using bibTeX and hyperref causes problems with bookmarks and 
+% tableofcontents and the bibliography entry. To solve these, use:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\phantomsection
+\markboth
+{Bibliography}
+{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\bibsep}{0.1em}
+\bibliographystyle{mn2efixed}
+% From http://andyxl.wordpress.com/2011/07/12/bibliography-blues/#comment-12363:
+\setlength{\bibhang}{2.0em}
+\setlength\labelwidth{0.0em}
+\bibliography{mn-jour,egpbib}
+% \bibliography{refs}
+% \bibliographystyle{apj}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{spacing}
+
+\setcounter{chapter}{0} % make sure it's the right number!
+\setcounter{figure}{0} % make sure it's the right number!
+\setcounter{footnote}{0} % make sure it's the right number!
+
+
+% \addthumb{dutchsum}{}{ch_frontandback_fg}{ch_frontandback}
+% \clearpage
+% \markboth
+% {Nederlandse samenvatting}
+% {Nederlandse samenvatting}
+% \phantomsection
+% \include{ch_frontandback/dutch_summary} 
+% \newpage
+
+
+% \addthumb{acknowledgments}{}{ch_frontandback_fg}{ch_frontandback}
+% \include{ch_frontandback/acknowledgments}
+% \newpage
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

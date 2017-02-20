@@ -1,0 +1,763 @@
+%!TEX root = thesis.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Kapteyn Institute Thesis Model, revised by Bruno Letarte 2006
+% Later used by Matias Arrigoni (2010), Thomas Martinsson (2011), Stephan Peters
+% (2014) and Patrick Bos (2016).
+%
+% make PDF directly with pdflatex, dvi can mess up the page size.
+% pdflatex -output-format=pdf
+% for this, make all figures as pdf (or jpeg, png) with: epstopdf.
+% UPDATE (P.B.): don't do it manually, just use the epstopdf package!
+% Doesn't seem to work though... oh well.
+%
+% dutch thesis size: 170mm x 240mm
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EGP: No idea what this does, but it was in thesis.tex and I think it should
+%      be here.
+\DeclareTextCommandDefault{\nobreakspace}{\leavevmode\nobreak\ } 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use {lmodern} instead of {ae,aecompl} if possible.
+% Do not use [T1]{fontenc} without one of the two other.
+% This makes sure you have scalable fonts with support for special 
+% characters, accents, and support for hyphenation in most languages.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{ae,aecompl} \usepackage[T1]{fontenc}
+% EGP: lmodern is no longer being updated, but also it doesn't support
+%      smallcaps in section headers. cm-super does and it is automatically
+%      used when [T1]{fontenc} is loaded (no need to do a usepackage).
+% \usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% EGP: following should fix small caps in titles (but doesn't) (from
+% http://tex.stackexchange.com/a/22241/66614):
+% \normalfont % needed to load cmss
+% \DeclareFontShape{T1}{cmss}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% with TeXLive 2005, pdfeTeX replaces TeX and creates both .dvi and .pdf
+% use only if you use pdfeTeX as your latex compiler (check bin link)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pdfadjustspacing=1    %use same spacing as old LaTeX
+\usepackage{pdflscape}  %use lscape if not using pdfeTeX for landscape
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other packages and commands, optional
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}  %to include figures
+\usepackage{epstopdf}  % must be after graphicx, otherwise may not work
+\usepackage[space]{grffile}   % for figure filenames with spaces
+\usepackage{longtable} %tables on more than one page
+\usepackage{tabularx}  %tables with auto-breaking lines, etc.
+\usepackage{booktabs}  %prettier tables
+\usepackage{rotating}  %rotate tables
+\usepackage{sidecap}   %use with \begin{SCfigure}
+\usepackage{lineno}    %use with \linenumbers* to start lines at 1.
+\usepackage{lettrine}  %use with \lettrine{F}{irst} word of a chapter
+\usepackage{soul}      %use for \st{text} (strike-out)
+\usepackage{subcaption}    % for subfloats
+\usepackage{color}
+\usepackage{amsmath, amssymb} %for math symbols
+% \usepackage{stmaryrd}     %for math symbols; EGP: removed, gave me an error, wasn't using it anyway
+\usepackage{bm}       % for bold math symbols, http://tex.stackexchange.com/questions/3238/bm-package-versus-boldsymbol
+% EGP: I was using boldsymbol for vectors before, but this gave some issues in
+%      the list of figures, somehow (warnings, not errors, but still annoying).
+\usepackage[perpage,symbol*,hang]{footmisc} %better footnotes
+% \usepackage[hang]{footmisc} %better footnotes % EGP: double
+\usepackage[title,titletoc]{appendix}       %\begin{subappendices}
+%\usepackage{appendix}
+\def\labelitemi{\ensuremath\bullet}  % to avoid a font warning
+\def\labelitemii{\ensuremath\bullet} % to avoid a font warning
+
+% EGP: (voor barcode_rsd chapter):
+\usepackage{amsfonts}
+\usepackage{mathrsfs} % mathscr commando
+\usepackage[usenames,dvipsnames]{xcolor} % voor gekleurde tekst en symbolen in vergelijkingen
+\usepackage{mathtools} % \mathclap and other things to make equations prettier
+\usepackage{empheq} % emphasize equations, logisch
+
+% EGP: gothic fonts (\textfrak, \textswab, \textgoth):
+\usepackage{yfonts}
+
+% EGP: make toc compacter
+\usepackage{tocloft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use only if you have a recent version of caption: >= 2004/07/16 v3.0c
+% ex: \captionsetup[longtable]{font=small, justification=centering}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{RUGred}{RGB}{0,0,0}
+\definecolor{RUGredgrey}{RGB}{100,100,100}
+\definecolor{RUGblue}{RGB}{0,0,0}
+\definecolor{RUGbluegrey}{RGB}{100,100,100}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy style with bar on top, no page number on bottom
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancyplain} 
+\cfoot{} % Remove page number at the bottom of the page
+%\setlength{\headwidth}{\textwidth} %reset this after geometry package
+\renewcommand{\chaptermark}[1]{\markboth{chapter \thechapter:~ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection:~ #1}}
+\lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\textsc\rightmark}}
+\rhead[\fancyplain{}{\textsc\leftmark}]{\fancyplain{}{\thepage}}
+
+
+
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\color{RUGredgrey}\slshape\thepage}
+\fancyhead[RE]{\color{RUGredgrey}\slshape \leftmark}
+\fancyhead[LO]{\color{RUGredgrey}\slshape \rightmark}
+
+
+
+
+\usepackage{titlesec}
+\usepackage[percent]{overpic}
+
+
+
+
+\titleformat{\section}{\color{RUGred}\normalfont\Large\bfseries}{\color{RUGred}\thesection}{1em}{}
+\titleformat{\subsection}{\color{RUGred}\normalfont\bfseries}{\color{RUGred}\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\color{RUGred}\normalfont\bfseries}{}{1em}{}
+\titlespacing{\section}{0pt}{10pt}{3pt}
+\titlespacing{\subsection}{0pt}{10pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{10pt}{0pt}
+\setlength{\parindent}{0cm}
+\newcommand{\hsp}{\hspace{10pt}}
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{RUGred}{|}\hsp}{0pt}{\Huge\bfseries}
+
+
+
+
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter \hsp \resizebox{!}{22pt}{\includegraphics{ch_frontandback/thickslash.pdf}} \hsp}{0pt}{\Huge\bfseries}
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\resizebox{0.3\textwidth}{!}{\includegraphics{ch_frontandback/thickslash.pdf}}\thechapter}{0pt}{\Huge\bfseries}
+
+%
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\begin{overpic}[scale=.35,tics=10]{ch_frontandback/thickslash.pdf}\put(10,50){\huge \bfseries \thechapter}\end{overpic}}{0pt}{\Huge\bfseries}
+
+
+\titlespacing{\chapter}{}{10pt}{}[23pt]
+
+
+
+
+
+% \renewcommand{\headheight}{13.6pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language and Bibliography style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[dutch,english]{babel}
+\usepackage[]{natbib}
+
+\bibpunct{(}{)}{;}{a}{}{,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% this hyperref packages must be loaded at the end.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\ifpdf
+%%%... do things, if pdfTeX is running in pdf mode ...
+%\usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
+%%%\pdfminorversion 6 % if need pdf 1.6 instead of default 1.4
+%\else
+%%%... other TeX or pdfTeX in dvi mode ...
+%\usepackage[dvips, bookmarksopen,bookmarksnumbered]{hyperref}
+%\fi
+% \usepackage[bookmarksopen,bookmarksnumbered]{hyperref}
+\usepackage[bookmarksopen,
+            bookmarksnumbered,
+            colorlinks,
+            linkcolor=blue,
+            citecolor=blue,
+            urlcolor=blue,
+            pdfauthor={Bos et al.},
+            linktocpage=true,
+            draft % set this to remove hyperlinks for the print version
+            ]{hyperref} % klikbare referenties, citaties en inhoudsopgave, van http://arxiv.org/abs/1405.4285
+
+\hypersetup{pdfauthor  = {E. G. Patrick Bos},
+            pdftitle   = {Clusters, Voids and Reconstructions of the Cosmic Web},
+            pdfsubject = {PhD Thesis, Kapteyn Astronomical Institute, University of Groningen, 2016},
+            pdfkeywords= {cosmology, large scale structure, dark energy, voids, Bayesian, reconstructions}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Geometry must be loaded after hyperref for proper papersize in pdf
+% redefine the \setlength{\headwidth}{\textwidth} for new textwidth!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[dvips=false,pdftex=false,vtex=false]{geometry} %remove default
+\geometry{twoside, %needed for outer+inner margins
+          %showframe %remove for final print
+          nofoot, %no bottom pages
+          nomarginpar,
+          paperwidth=174mm,  % include 4mm for bleed
+          paperheight=244mm, % include 4mm for bleed
+          layoutwidth=170mm,
+          layoutheight=240mm,
+          layouthoffset=2mm, % bleed; printer will cut this off; used for edge-images
+          layoutvoffset=2mm, % bleed
+          headsep=5mm, %between top bar and text
+          %headheight=5mm, %no need to set it, will expand normally
+          top=25mm, %includes headsep + headheight
+          bottom=15mm,
+          inner=22mm,
+          outer=18mm,
+          portrait}
+
+
+\setlength{\headwidth}{\textwidth} %header line on top of fancyheader
+\setlength{\headheight}{13.6pt} %header line on top of fancyheader
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make a frame around papersize, important to load after {geometry}
+% !!! REMOVE all of that for final version !!!
+% to test printing a real page size, use a crop in this way:
+%\usepackage[pdftex,frame,noinfo]{crop} %no a4, no info, no center
+% or (with dvi):
+%\usepackage[dvips, frame,noinfo]{crop} %no a4, no info, no center
+% dvips -Ppdf -G0 -T 170mm,240mm thesis.dvi && ps2pdf thesis.ps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \ifpdf %output-format=pdf
+% \usepackage[pdftex,a4,center,frame]{crop} %center the small page on a A4paper:
+\usepackage[pdftex,frame,noinfo]{crop} %no a4, no info, no center
+% \else %output-format=dvi: 
+ % \usepackage[pdftex,a4,center,noinfo]{crop} %center the small page on a A4paper:
+%\usepackage[dvips,a4,center,frame,noinfo]{crop} %no a4, no info, no center
+ %dvips -Ppdf -G0 -t A4size thesis.dvi && ps2pdf -sPAPERSIZE=a4 thesis.ps
+% \fi
+
+
+
+\usepackage{setspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defines macros for personal use
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fei}{Fe\,{\sc i}}
+\newcommand{\feii}{Fe\,{\sc ii}}
+\newcommand{\tii}{Ti\,{\sc i}}
+\newcommand{\tiii}{Ti\,{\sc ii}}
+\newcommand{\gf}{\textit{\sffamily{g}\rmfamily{f}}}
+\newcommand{\logg}{\ensuremath{\log g}}
+\newcommand{\msol}{\ensuremath{\mathcal{M}_{\odot}}}
+\newcommand{\msun}{\mbox{${\rm M}_{\odot}$}}
+
+% -----------------------------------------------------------------------------------------------
+% Nomenclature used in the Disk-Mass series
+
+% Latest update from TPKM nov10
+
+% Shorthands
+\newcommand{\sect}{\S~}
+\newcommand{\sects}{\S\S~}
+\newcommand{\dpr}{^{\prime\prime}}
+\newcommand{\kms}{{km s$^{-1}$}}
+\newcommand{\ang}{{\AA}}
+\newcommand{\ston}{S/N}
+\newcommand{\mston}{\langle S/N\rangle}
+\newcommand{\llsol}{\mathcal{L}_\odot^{\lambda}}
+\newcommand{\lksol}{\mathcal{L}_\odot^K}
+\newcommand{\sdu}{$\msol$ pc$^{-2}$}
+\newcommand{\denu}{$\msol$ kpc$^{-3}$}
+\newcommand{\muu}{mag arcsec$^{-2}$}
+
+% Ions
+\newcommand{\halp}{H$\alpha$}
+\newcommand{\hbet}{H$\beta$}
+
+\usepackage{relsize}
+
+%\newcommand\ion[2]{#1$\;${\scshape{#2}}}%
+
+%\newcommand{\hi}{\textrm{H$_\textrm{I}$}}
+%\newcommand{\hi}{\textrm{\textsc{H{\smaller}I}}}
+
+% Define HI
+%\ifmmode \newcommand{\hi}{\textrm{\textsc{HI}} }%
+%\else \newcommand{\hi}{{\textsc{H{\smaller}I}} }%
+%\fi
+
+\newcommand{\hi}{%
+  \relax
+  \ifmmode
+    \textrm{\textsc{HI}}
+  \else
+    \textsc{H{\smaller}I}
+  \fi
+}
+
+
+
+
+
+%\newcommand{\hi}{\textsc{Hi} }
+
+
+\newcommand{\oh}{OH }
+\newcommand{\co}{CO }
+\newcommand{\oiii}{[O{\scshape iii}]}
+\newcommand{\hone}{H{\scshape i}}
+\newcommand{\none}{N{\scshape i}}
+\newcommand{\nii}{[N{\scshape ii}]}
+\newcommand{\sii}{[S{\scshape ii}]}
+\newcommand{\mgi}{Mg{\scshape i}}
+%\newcommand{\fei}{Fe{\scshape i}}
+
+% Coordinates
+\newcommand{\gaz}{\theta}
+\newcommand{\pa}{\phi_0}
+\newcommand{\saz}{\phi}
+\newcommand{\rhi}{R_{\mbox{\small \ion{H}{1}}}}
+
+% Velocities
+\newcommand{\vhel}{V_{\rm hel}}
+\newcommand{\vsys}{V_{\rm sys}}
+\newcommand{\vobs}{V_{\rm obs}}
+\newcommand{\vlos}{V_{\rm LOS}}
+\newcommand{\vglos}{V_{\rm g}^{\rm LOS}}
+\newcommand{\vslos}{V_{\ast}^{\rm LOS}}
+\newcommand{\vt}{V_\theta}
+\newcommand{\vrad}{V_R}
+\newcommand{\vz}{V_z}
+\newcommand{\vrot}{V_{\rm rot}}
+\newcommand{\vc}{V_{\rm c}}
+\newcommand{\vdisk}{V_{\rm disk}}
+\newcommand{\vstar}{V_{\ast}}
+\newcommand{\vdiskgas}{V^{\rm disk}_{\rm gas}}
+\newcommand{\vdiskstar}{V^{\rm disk}_\ast}
+\newcommand{\vdiskstarmax}{V^{\rm disk}_{\ast,\rm max}}
+\newcommand{\vbulge}{V_{\rm bulge}}
+\newcommand{\vhalo}{V_{\rm halo}}
+\newcommand{\vdm}{V_{\rm DM}}
+\newcommand{\vism}{V_{\rm ISM}}
+\newcommand{\vgas}{V_{\rm gas}}
+\newcommand{\vsphere}{V_{\rm sphere}}
+\newcommand{\vbar}{V_{\rm bar}}
+
+
+% Velocity Dispersions
+\newcommand{\sobs}{\sigma_{\rm obs}}
+\newcommand{\slos}{\sigma_{\rm LOS}}
+\newcommand{\smaj}{\sigma_{\rm maj}}
+\newcommand{\smin}{\sigma_{\rm min}}
+\newcommand{\sglos}{\sigma_{\rm g}^{\rm LOS}}
+\newcommand{\sslos}{\sigma_{\ast}^{\rm LOS}}
+\newcommand{\sinst}{\sigma_{\rm inst}}
+\newcommand{\stinst}{\sigma^{\rm inst}_T}
+\newcommand{\sginst}{\sigma^{\rm inst}_G}
+\newcommand{\sbs}{\sigma_{\rm beam}}
+\newcommand{\stm}{\sigma_{\rm tpl}}
+
+% Stellar Velocity Ellipsoid
+\newcommand{\sigr}{\sigma_R}
+\newcommand{\sigp}{\sigma_{\gaz}}
+\newcommand{\sigz}{\sigma_z}
+\newcommand{\lrz}{\lambda_{Rz}}
+
+% Photometrics
+
+% Surface Densities
+\newcommand{\sddisk}{\Sigma_{\rm dyn}}
+\newcommand{\sds}{\Sigma_{\rm \ast}}
+\newcommand{\sdhi}{\Sigma_{\mbox{\rm \footnotesize H{\scshape i}}}}
+\newcommand{\sdi}{\Sigma_{\rm ion}}
+\newcommand{\sda}{\Sigma_{\rm atom}}
+\newcommand{\sdm}{\Sigma_{\rm mol}}
+\newcommand{\sdmh}{\Sigma_{\rm H_2}}
+\newcommand{\sdg}{\Sigma_{\rm gas}}
+\newcommand{\sdd}{\Sigma_{\rm dust}}
+\newcommand{\sddm}{\Sigma_{\rm DM}}
+
+\newcommand{\rhodisk}{\rho_{\ast}^{\rm disk}}
+\newcommand{\rhodm}{\rho_{\rm DM}}
+\newcommand{\rhob}{\rho_{\rm b}}
+
+% Masses
+\newcommand{\mtotdisk}{\mathcal{M}^{\rm tot}_{\rm disk}}
+\newcommand{\mtot}{\mathcal{M}^{\rm tot}_{\rm dyn}}
+\newcommand{\mdisk}{\mathcal{M}^{\rm disk}_{\rm dyn}}
+\newcommand{\mdiskstar}{\mathcal{M}^{\rm disk}_{\rm \ast}}
+\newcommand{\mbulgestar}{\mathcal{M}^{\rm bulge}_{\ast}}
+\newcommand{\mhalo}{\mathcal{M}^{\rm halo}_{\rm dyn}}
+\newcommand{\mhalodm}{\mathcal{M}^{\rm halo}_{\rm DM}}
+\newcommand{\mhalobar}{\mathcal{M}^{\rm halo}_{\rm bar}}
+\newcommand{\mhi}{\mathcal{M}_{\mbox{\small \ion{H}{1}}}}
+\newcommand{\matom}{\mathcal{M}_{\rm atom}}
+\newcommand{\mmol}{\mathcal{M}_{\rm mol}}
+\newcommand{\mg}{\mathcal{M}_{\rm gas}}
+\newcommand{\mdust}{\mathcal{M}_{\rm dust}}
+\newcommand{\mbar}{\mathcal{M}_{\rm bar}}
+\newcommand{\mb}{\mathcal{M}_{\rm b}}
+\newcommand{\mdm}{\mathcal{M}_{\rm DM}}
+
+% Mass-to-light Ratios
+\newcommand{\ml}{\Upsilon}
+\newcommand{\mldyn}{\Upsilon_{\rm dyn}}
+\newcommand{\mldynl}{\Upsilon_{\rm dyn,\lambda}}
+\newcommand{\mldynk}{\Upsilon_{{\rm dyn},K}}
+\newcommand{\mldyndisk}{\Upsilon_{\rm dyn}^{\rm disk}}
+\newcommand{\mldynldisk}{\Upsilon_{\rm dyn,\lambda}^{\rm disk}}
+\newcommand{\mldynkdisk}{\Upsilon_{{\rm dyn},K}^{\rm disk}}
+\newcommand{\mls}{\Upsilon_\ast}
+\newcommand{\mlsdisk}{\Upsilon_\ast^{\rm disk}}
+\newcommand{\mlsl}{\Upsilon_{\ast,\lambda}}
+\newcommand{\mlsldisk}{\Upsilon_{\ast,\lambda}^{\rm disk}}
+\newcommand{\mlsk}{\Upsilon_{\ast,K}}
+\newcommand{\mlsksps}{\Upsilon_{\ast,K}^{\rm SPS}}
+\newcommand{\mlskdisk}{\Upsilon_{\ast,K}^{\rm disk}}
+\newcommand{\mlsld}{\Upsilon_{\ast,\lambda}^{\rm disk}}
+\newcommand{\mlslbl}{\Upsilon_{\ast,\lambda}^{\rm bulge}}
+
+% Disk Maximalities or Mass Fractions
+\newcommand{\fdmhalo}{f_{\rm DM}^{\rm halo}}
+\newcommand{\fsd}{f_\ast^{\rm disk}}
+\newcommand{\Fbulge}{\mathcal{F}_{\ast}^{\rm bulge}}
+\newcommand{\Fdisk}{\mathcal{F}_{\ast}^{\rm disk}}
+\newcommand{\Fdiskmax}{\mathcal{F}_{\ast,{\rm max}}^{\rm disk}}
+\newcommand{\rdmax}{R_{\ast,{\rm max}}^{\rm disk}}
+\newcommand{\Fb}{\mathcal{F}_{\rm b}}
+\newcommand{\Fbmax}{\mathcal{F}^{\rm b}_{\rm max}}
+
+
+
+% Included by TPKM:
+\newcommand{\arot}{V_{\rm arot}}
+\newcommand{\hr}{h_{R}}
+\newcommand{\hz}{h_{z}}
+%\newcommand{\hv}{h_{v}}
+\newcommand{\hs}{h_{\sigma}}
+\newcommand{\vmax}{V_{\rm max}}
+\newcommand{\rHI}{R_{\rm HI}}
+\newcommand{\mstar}{\mathcal{M}_{\ast}}
+\newcommand{\Fbary}{\mathcal{F}_{\rm bary}}
+\newcommand{\vbary}{V_{\rm bary}}
+
+
+\newcommand\arcdeg{\mbox{$^\circ$}}%
+\newcommand\arcmin{\mbox{$^\prime$}}%
+\newcommand\arcsec{\mbox{$^{\prime\prime}$}}%
+\newcommand\fd{\mbox{$.\!\!^{\mathrm d}$}}%
+\newcommand\fh{\mbox{$.\!\!^{\mathrm h}$}}%
+\newcommand\fm{\mbox{$.\!\!^{\mathrm m}$}}%
+\newcommand\fs{\mbox{$.\!\!^{\mathrm s}$}}%
+\newcommand\fdg{\mbox{$.\!\!^\circ$}}%
+%\newcommand\farcm@mss{\mbox{$.\mkern-4mu^\prime$}}
+% \let\farcm\farcm@mss
+%\newcommand\farcs@mss{\mbox{$.\!\!^{\prime\prime}$}}
+% \let\farcs\farcs@mss
+
+
+% EGP:
+\def\hmpc{~h^{-1} {\rm Mpc}}
+
+
+
+% -----------------------------------------------------------------------------------------------
+
+\DeclareMathOperator\erf{erf}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix as chapter sections for thesis without using \appendix
+% Will be in ToC, for example: numbered 5.A and figs will be 5.A1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{subappendices}
+%\renewcommand{\thetable}{\arabic{chapter}.\Alph{section}\arabic{table}}
+%\setcounter{table}{0}
+%\renewcommand{\thefigure}{\arabic{chapter}.\Alph{section}\arabic{figure}}
+%\setcounter{figure}{0}
+%\section{Extra tables and figures}
+%\end{subappendices}
+
+% EGP: with this defined, you don't need to do the above anymore.
+%      From http://tex.stackexchange.com/a/120723/66614 
+%   Unfortunately, the counterwithin commands break figure numbering in regular
+%   sections, so left it out in the end.
+% \usepackage{chngcntr}
+\usepackage{etoolbox}
+\AtBeginEnvironment{subappendices}{% AtBeginEnvironment is from etoolbox
+\chapter*{Appendix}
+% % \addcontentsline{toc}{chapter}{Appendices}
+% \counterwithin{figure}{section}  % from chngcntr
+% \counterwithin{table}{section}  % from chngcntr
+}
+% Can then do just:
+% \begin{subappendices}
+% \section{Some title for an appendix}
+% blablbala
+% \section{Some title for an appendix}
+% \end{subappendices}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Alter some LaTeX defaults for better treatment of figures:
+% See p.105 of "TeX Unbound" for suggested values.
+% See pp. 199-200 of Lamport's "LaTeX" book for details.
+% This is not necessary but does make a better job of placing floats.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   General parameters, for ALL pages:
+\renewcommand{\topfraction}{0.9}    % max fraction of floats at top
+\renewcommand{\bottomfraction}{0.8} % max fraction of floats at bottom
+
+%   Parameters for TEXT pages (not float pages):
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}         % 2 may work better
+\setcounter{dbltopnumber}{2}        % for 2-column pages
+\renewcommand{\dbltopfraction}{0.9} % fit big float above 2-col. text
+\renewcommand{\textfraction}{0.07}  % allow minimal text w. figs
+
+%   Parameters for FLOAT pages (not text pages):
+\renewcommand{\floatpagefraction}{0.7}      % require fuller float pages
+
+%   N.B.: floatpagefraction MUST be less than topfraction !!
+\renewcommand{\dblfloatpagefraction}{0.7}   % require fuller float pages
+
+
+
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \ifodd\value{page}\hbox{}\newpage\fi
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography and bibfile (need aa.bst in directory)
+% direct copy from aa.cls for bibtex definitions
+% If you don't use bibtex, you don't need that.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\aj{AJ}%
+          % Astronomical Journal
+\def\actaa{Acta Astron.}%
+          % Acta Astronomica
+\def\araa{ARA\&A}%
+          % Annual Review of Astron and Astrophys
+\def\apj{ApJ}%
+          % Astrophysical Journal
+\def\apjl{ApJ}%
+          % Astrophysical Journal, Letters
+\def\apjs{ApJS}%
+          % Astrophysical Journal, Supplement
+\def\ao{Appl.~Opt.}%
+          % Applied Optics
+\def\apss{Ap\&SS}%
+          % Astrophysics and Space Science
+\def\aap{A\&A}%
+          % Astronomy and Astrophysics
+\def\aapr{A\&A~Rev.}%
+          % Astronomy and Astrophysics Reviews
+\def\aaps{A\&AS}%
+          % Astronomy and Astrophysics, Supplement
+\def\azh{AZh}%
+          % Astronomicheskii Zhurnal
+\def\baas{BAAS}%
+          % Bulletin of the AAS
+\def\bac{Bull. astr. Inst. Czechosl.}%
+          % Bulletin of the Astronomical Institutes of Czechoslovakia 
+\def\caa{Chinese Astron. Astrophys.}%
+          % Chinese Astronomy and Astrophysics
+\def\cjaa{Chinese J. Astron. Astrophys.}%
+          % Chinese Journal of Astronomy and Astrophysics
+\def\icarus{Icarus}%
+          % Icarus
+\def\jcap{J. Cosmology Astropart. Phys.}%
+          % Journal of Cosmology and Astroparticle Physics
+\def\jrasc{JRASC}%
+          % Journal of the RAS of Canada
+\def\mnras{MNRAS}%
+          % Monthly Notices of the RAS
+\def\memras{MmRAS}%
+          % Memoirs of the RAS
+\def\na{New A}%
+          % New Astronomy
+\def\nar{New A Rev.}%
+          % New Astronomy Review
+\def\pasa{PASA}%
+          % Publications of the Astron. Soc. of Australia
+\def\pra{Phys.~Rev.~A}%
+          % Physical Review A: General Physics
+\def\prb{Phys.~Rev.~B}%
+          % Physical Review B: Solid State
+\def\prc{Phys.~Rev.~C}%
+          % Physical Review C
+\def\prd{Phys.~Rev.~D}%
+          % Physical Review D
+\def\pre{Phys.~Rev.~E}%
+          % Physical Review E
+\def\prl{Phys.~Rev.~Lett.}%
+          % Physical Review Letters
+\def\pasp{PASP}%
+          % Publications of the ASP
+\def\pasj{PASJ}%
+          % Publications of the ASJ
+\def\qjras{QJRAS}%
+          % Quarterly Journal of the RAS
+\def\rmxaa{Rev. Mexicana Astron. Astrofis.}%
+          % Revista Mexicana de Astronomia y Astrofisica
+\def\skytel{S\&T}%
+          % Sky and Telescope
+\def\solphys{Sol.~Phys.}%
+          % Solar Physics
+\def\sovast{Soviet~Ast.}%
+          % Soviet Astronomy
+\def\ssr{Space~Sci.~Rev.}%
+          % Space Science Reviews
+\def\zap{ZAp}%
+          % Zeitschrift fuer Astrophysik
+\def\nat{Nature}%
+          % Nature
+\def\iaucirc{IAU~Circ.}%
+          % IAU Cirulars
+\def\aplett{Astrophys.~Lett.}%
+          % Astrophysics Letters
+\def\apspr{Astrophys.~Space~Phys.~Res.}%
+          % Astrophysics Space Physics Research
+\def\bain{Bull.~Astron.~Inst.~Netherlands}%
+          % Bulletin Astronomical Institute of the Netherlands
+\def\fcp{Fund.~Cosmic~Phys.}%
+          % Fundamental Cosmic Physics
+\def\gca{Geochim.~Cosmochim.~Acta}%
+          % Geochimica Cosmochimica Acta
+\def\grl{Geophys.~Res.~Lett.}%
+          % Geophysics Research Letters
+\def\jcp{J.~Chem.~Phys.}%
+          % Journal of Chemical Physics
+\def\jgr{J.~Geophys.~Res.}%
+          % Journal of Geophysics Research
+\def\jqsrt{J.~Quant.~Spec.~Radiat.~Transf.}%
+          % Journal of Quantitiative Spectroscopy and Radiative Trasfer
+\def\memsai{Mem.~Soc.~Astron.~Italiana}%
+          % Mem. Societa Astronomica Italiana
+\def\nphysa{Nucl.~Phys.~A}%
+          % Nuclear Physics A
+\def\physrep{Phys.~Rep.}%
+          % Physics Reports
+\def\physscr{Phys.~Scr}%
+          % Physica Scripta
+\def\planss{Planet.~Space~Sci.}%
+          % Planetary Space Science
+\def\procspie{Proc.~SPIE}%
+          % Proceedings of the SPIE
+\let\astap=\aap
+\let\apjlett=\apjl
+\let\apjsupp=\apjs
+\let\applopt=\ao
+\addtolength{\parskip}{2mm}
+
+
+
+% \usepackage[font={small,it}, labelfont={small,bf}]{caption}
+\definecolor{dark-gray}{gray}{0.15}
+\DeclareCaptionFont{gray}{\color{dark-gray}}
+% \definecolor{dark-blue}{rgb}{0,0,0.3}
+% \DeclareCaptionFont{blue}{\color{dark-blue}}
+% \usepackage[labelfont={sc}, format=plain,indention=.5cm]{caption}
+\usepackage[font=gray, labelfont=bf, textfont=sl, format=plain, labelsep=endash]{caption}
+
+
+\usepackage{etoolbox}
+\patchcmd{\headrule}{\hrule}{\color{white}\hrule}{}{}
+
+% EGP: removed footnote edit:
+% \def\footnotelayout{\color{RUGblue}}
+
+\newcommand{\comment}[1] {{\color{Cerulean}{#1}}}
+% EGP: removed footnote edit:
+% \renewcommand{\thefootnote}{\textcolor{RUGbluegrey}{\arabic{footnote}}}
+%\newcommand{\chapterabstract}[1]{\vskip 1em\centerline{\begin{minipage}{0.8\textwidth}ABSTRACT - #1 \end{minipage}}\vskip 1em}
+\newcommand{\chapterabstract}[1]{\textbf{#1}}
+\newcommand{\chapterauthors}[1]{\vskip 0.8em\centerline{\begin{minipage}{0.9\textwidth}{ \color{RUGblue}\bf #1 }\end{minipage}}\vskip 1em}
+\newcommand{\chapterpublish}[1]{\centerline{\begin{minipage}{0.9\textwidth}{ \color{RUGblue} #1 }\end{minipage}}\vskip 1em}
+\newcommand{\chapterstatus}[1]{\textit{#1}}
+
+\newcommand{\abs}[1]{\mid #1 \mid}
+
+\usepackage{multirow}
+
+
+% \renewcommand*{\bibfont}{\small}  % EGP: weggehaald, compileerde niet op Mac
+
+
+
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+
+%\newcommand{\chapterauthors}[1]{\vskip -1em \centerline{\begin{minipage}{0.8\textwidth}\bf #1 \end{minipage}}\}}
+
+
+% One can put words in the hyphenation command to indicate where they can or
+% cannot be hyphenated. See http://www.giss.nasa.gov/tools/latex/ltx-244.html
+% \hyphenation{}
+
+
+% TM: Added to get better figure placements
+% EGP: moved from thesis.tex to model.tex
+\renewcommand{\topfraction}{1.00} % max fraction of floats at top
+\renewcommand{\bottomfraction}{0.99}  % max fraction of floats at bottom
+\renewcommand{\textfraction}{0.00}  % allow minimal text w. figs
+\renewcommand{\floatpagefraction}{0.7}  % require fuller float pages
+
+
+% EGP: todonotes, handy stuff, though tikz requirement makes it slow to compile
+\usepackage{todonotes}
+\newcommand{\todoi}[1] {\todo[inline]{#1}}
+\newcommand{\todog}[1] {\todo[inline, color=green!40]{#1}}
+\newcommand{\todor}[1] {\todo[inline, color=red!40]{#1}}
+\newcommand{\todolow}[1] {\todo[inline, color=gray!40]{Low priority:\\#1}}
+\newcommand{\todohi}[1] {\todog{High priority:\\#1}}
+\newcommand{\torien}[1] {\todor{Need help from Rien:\\#1}}
+\newcommand{\todofig}[1] {\todo[inline, color=magenta]{Redo figure:\\#1}}
+
+
+% EGP: used for configurable enumerate counters
+\usepackage{enumerate}
+\usepackage[inline]{enumitem}
+
+% EGP: for vertical-bar "evaluated at" notation that looks better than with
+%      \substack (see http://tex.stackexchange.com/a/122333/66614)
+\usepackage{stackengine}
+
+% EGP: for source code
+\usepackage{listings}
+
+% EGP: nice 3D coordinate axis diagrams (tikz is dependency)
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+
+% EGP: authors and affiliations
+\usepackage{authblk}
+
+% EGP: for side of the page colored boxes
+% \input{thumbs_48648_66614}
+\usepackage{thumbs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Need one style file (fncychap.sty) for chapter cover pages:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+
+% EGP: load fncychap after any edits to geometry and lengths!
+\usepackage[Bjornstrup]{fncychap}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
