@@ -6,6 +6,12 @@ The only requirements to compile this template as it is are:
 * A recent version of TeXLive (2016 and 2017 should work)
 * [My bibliography, which is in a separate repo](https://bitbucket.org/egpbos/egpbib)
 
+The way I compile is by using the SublimeText3 plugin LaTeXTools' ctrl-B command, which is equivalent to running in your terminal:
+```sh
+latexmk -cd -e -f -pdf -interaction=nonstopmode -synctex=1 thesis.tex
+```
+Alternatively, if you like giving yourself a hard time, you can run `pdflatex` and `bibtex` multiple times manually until all references finally work ;)
+
 Please feel free to use and/or modify this template as you see fit.
 If you make some nice additions, please consider forking this repo and publishing your additions so that others may benefit too.
 
