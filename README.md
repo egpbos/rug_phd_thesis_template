@@ -8,3 +8,6 @@ The only requirements to compile this template as it is are:
 
 Please feel free to use and/or modify this template as you see fit.
 If you make some nice additions, please consider forking this repo and publishing your additions so that others may benefit too.
+
+This template was a living document floating around the Kapteyn Institute for at least a decade.
+As far as I could trace, its family tree consists of the PhD theses of Bruno Letarte (2006), Matias Arrigoni (2010), Thomas Martinsson (2011), Stephan Peters (2014) and Patrick Bos (2016).
